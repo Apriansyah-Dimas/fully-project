@@ -11,7 +11,7 @@ interface NavItemRef {
 interface NavHighlightProps {
   activeIndex: number
   hoverIndex: number | null
-  navItemRefs: React.RefObject<(HTMLAnchorElement | null)[]>
+  navItemRefs: React.RefObject<(HTMLElement | null)[]>
 }
 
 export function NavHighlight({ activeIndex, hoverIndex, navItemRefs }: NavHighlightProps) {

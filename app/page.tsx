@@ -1,11 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSupabase } from '@/components/providers/SessionProvider'
 import { AppView } from '@/components/views/AppView'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, loading } = useSupabase()
@@ -34,4 +35,16 @@ export default function Home() {
 
   // Show the AppView component
   return <AppView />
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
+  )
 }

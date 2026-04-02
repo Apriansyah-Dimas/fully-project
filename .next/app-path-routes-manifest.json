@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/page": "/",
+  "/admin/add-event/page": "/admin/add-event",
+  "/login/page": "/login",
+  "/(protected)/calendar/page": "/calendar",
+  "/(protected)/contact/page": "/contact",
+  "/(protected)/about/page": "/about",
+  "/(protected)/dashboard/page": "/dashboard",
+  "/(protected)/home/page": "/home",
+  "/(protected)/handbook/page": "/handbook",
+  "/(protected)/assets/page": "/assets"
+}
