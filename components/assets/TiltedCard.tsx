@@ -92,11 +92,12 @@ export function TiltedCard({
     rotateFigcaption.set(0)
   }
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
     if (onClick) {
       onClick()
     } else if (href) {
-      window.location.href = href
+      window.open(href, '_blank')
     }
   }
 
@@ -113,6 +114,7 @@ export function TiltedCard({
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       role={href || onClick ? 'button' : undefined}
+      tabIndex={href || onClick ? 0 : undefined}
     >
       <motion.div
         className="tilted-card-inner"
@@ -121,11 +123,13 @@ export function TiltedCard({
           rotateY,
           scale,
         }}
+        onClick={handleClick}
       >
         <motion.img
           src={imageSrc}
           alt={altText}
           className="tilted-card-img"
+          onClick={handleClick}
         />
         {captionText && (
           <div style={{

@@ -8,6 +8,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  outline: none;
+}
+
+.tilted-card-figure:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 4px;
+  border-radius: 15px;
 }
 
 .tilted-card-inner {
@@ -27,6 +34,7 @@
   border-radius: 15px;
   will-change: transform;
   transform: translateZ(0);
+  pointer-events: auto;
 }
 
 .tilted-card-caption {
