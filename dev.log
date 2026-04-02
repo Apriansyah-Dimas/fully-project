@@ -1,0 +1,30 @@
+
+> hrimajin-nextjs@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+ ⚠ Port 3001 is in use, trying 3002 instead.
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.110.66:3002
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1466ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1524ms (771 modules)
+ GET / 200 in 1828ms
+ ✓ Compiled in 285ms (370 modules)
+ ✓ Compiled in 159ms (370 modules)
+ ✓ Compiled in 100ms (370 modules)
+ ✓ Compiled in 77ms (370 modules)
+ ✓ Compiled in 95ms (370 modules)
+ ✓ Compiled in 136ms (370 modules)
+ ✓ Compiled in 116ms (370 modules)
+ GET / 200 in 57ms
+ ✓ Compiled /_not-found in 222ms (761 modules)
+ GET /_next/static/css/app/layout.css?v=1775047200934 404 in 375ms
+ GET /_next/static/chunks/main-app.js?v=1775047200934 404 in 367ms
+ GET /_next/static/chunks/app/layout.js 404 in 57ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+ GET /_next/static/chunks/app/page.js 404 in 59ms
