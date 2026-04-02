@@ -1,13 +1,13 @@
 {
   "/_not-found/page": "/_not-found",
-  "/page": "/",
   "/admin/add-event/page": "/admin/add-event",
+  "/page": "/",
   "/login/page": "/login",
+  "/(protected)/about/page": "/about",
+  "/(protected)/assets/page": "/assets",
   "/(protected)/calendar/page": "/calendar",
   "/(protected)/contact/page": "/contact",
-  "/(protected)/about/page": "/about",
-  "/(protected)/dashboard/page": "/dashboard",
-  "/(protected)/home/page": "/home",
   "/(protected)/handbook/page": "/handbook",
-  "/(protected)/assets/page": "/assets"
+  "/(protected)/dashboard/page": "/dashboard",
+  "/(protected)/home/page": "/home"
 }
