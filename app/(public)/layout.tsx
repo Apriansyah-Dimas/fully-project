@@ -1,7 +1,9 @@
+import { AppShell } from '@/components/templates/AppShell'
+
 export default function PublicLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return <AppShell>{children}</AppShell>
 }

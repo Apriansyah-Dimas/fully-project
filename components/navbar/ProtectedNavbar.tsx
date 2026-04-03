@@ -1,37 +1,35 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
-import type { ViewType } from '@/components/views/AppView'
+import { usePathname } from 'next/navigation'
 import { NavHighlight } from './NavHighlight'
 
 interface ProtectedNavbarProps {
-  onViewChange: (view: ViewType) => void
-  currentView: ViewType
+  currentView?: string
 }
 
 const navItems = [
-  { name: 'Home', href: 'home' },
-  { name: 'About', href: 'about' },
-  { name: 'Contact', href: 'contact' },
-  { name: 'Calendar', href: 'calendar' },
-  { name: 'Assets', href: 'assets' },
-  { name: 'Handbook', href: 'handbook' },
+  { name: 'Home', href: '/home' },
+  { name: 'Calendar', href: '/calendar' },
+  { name: 'Assets', href: '/assets' },
+  { name: 'Handbook', href: '/handbook' },
 ]
 
-export function ProtectedNavbar({ onViewChange, currentView }: ProtectedNavbarProps) {
+export function ProtectedNavbar({ currentView }: ProtectedNavbarProps) {
+  const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(0)
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)
   const navItemRefs = useRef<(HTMLButtonElement | null)[]>(
     navItems.map(() => null)
   )
 
-  // Set initial active index based on currentView
+  // Set initial active index based on pathname
   useEffect(() => {
-    const index = navItems.findIndex(item => item.href === currentView)
+    const index = navItems.findIndex(item => item.href === pathname)
     if (index !== -1 && index !== activeIndex) {
       setActiveIndex(index)
     }
-  }, [currentView])
+  }, [pathname, activeIndex])
 
   const handleMouseEnter = useCallback((index: number) => {
     setHoverIndex(index)
@@ -41,11 +39,6 @@ export function ProtectedNavbar({ onViewChange, currentView }: ProtectedNavbarPr
     setHoverIndex(null)
   }, [])
 
-  const handleClick = useCallback((index: number, view: string) => {
-    setActiveIndex(index)
-    onViewChange(view as ViewType)
-  }, [onViewChange])
-
   return (
     <nav className="navbar fixed top-8 left-1/2 -translate-x-1/2 z-[200] flex gap-2">
       <NavHighlight
@@ -54,18 +47,18 @@ export function ProtectedNavbar({ onViewChange, currentView }: ProtectedNavbarPr
         navItemRefs={navItemRefs}
       />
       {navItems.map((item, index) => (
-        <button
+        <a
           key={item.name}
-          ref={(el) => { navItemRefs.current[index] = el }}
+          ref={(el) => { navItemRefs.current[index] = el as any }}
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick(index, item.href)}
+          href={item.href}
           className={`nav-link relative text-base font-semibold transition-colors duration-300 px-6 py-3 rounded-[30px] border-none bg-transparent cursor-pointer select-none z-[2] w-max ${
             (hoverIndex !== null ? hoverIndex : activeIndex) === index ? 'text-white' : 'text-black'
           }`}
         >
           {item.name}
-        </button>
+        </a>
       ))}
     </nav>
   )

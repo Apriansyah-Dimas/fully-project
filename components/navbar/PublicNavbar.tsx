@@ -1,35 +1,35 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
-import type { ViewType } from '@/components/views/AppView'
+import { usePathname } from 'next/navigation'
 import { NavHighlight } from './NavHighlight'
 import { ContactLink } from './ContactLink'
 
 interface PublicNavbarProps {
-  onViewChange: (view: ViewType) => void
-  currentView: ViewType
+  currentView?: string
 }
 
 const navItems = [
-  { name: 'Home', href: 'home' },
-  { name: 'About', href: 'about' },
-  { name: 'Contact', href: 'contact' },
+  { name: 'Home', href: '/home' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ]
 
-export function PublicNavbar({ onViewChange, currentView }: PublicNavbarProps) {
+export function PublicNavbar({ currentView }: PublicNavbarProps) {
+  const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(0)
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)
   const navItemRefs = useRef<(HTMLButtonElement | null)[]>(
     navItems.map(() => null)
   )
 
-  // Set initial active index based on currentView
+  // Set initial active index based on pathname
   useEffect(() => {
-    const index = navItems.findIndex(item => item.href === currentView)
+    const index = navItems.findIndex(item => item.href === pathname)
     if (index !== -1 && index !== activeIndex) {
       setActiveIndex(index)
     }
-  }, [currentView])
+  }, [pathname, activeIndex])
 
   const handleMouseEnter = useCallback((index: number) => {
     setHoverIndex(index)
@@ -38,12 +38,6 @@ export function PublicNavbar({ onViewChange, currentView }: PublicNavbarProps) {
   const handleMouseLeave = useCallback(() => {
     setHoverIndex(null)
   }, [])
-
-  const handleClick = useCallback((index: number, view: string) => {
-    console.log('Navigation clicked:', navItems[index].name, view)
-    setActiveIndex(index)
-    onViewChange(view as ViewType)
-  }, [onViewChange])
 
   return (
     <nav className="navbar fixed top-8 left-1/2 -translate-x-1/2 z-[200] flex gap-2">
@@ -59,24 +53,24 @@ export function PublicNavbar({ onViewChange, currentView }: PublicNavbarProps) {
             ref={(el) => { navItemRefs.current[index] = el }}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
-            onClick={() => handleClick(index, item.href)}
+            href={item.href}
             className={`nav-link relative text-base font-semibold transition-colors duration-300 px-6 py-3 rounded-[30px] border-none bg-transparent cursor-pointer select-none z-[2] w-max ${
               (hoverIndex !== null ? hoverIndex : activeIndex) === index ? 'text-white' : 'text-black'
             }`}
           />
         ) : (
-          <button
+          <a
             key={item.name}
-            ref={(el) => { navItemRefs.current[index] = el }}
+            ref={(el) => { navItemRefs.current[index] = el as any }}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
-            onClick={() => handleClick(index, item.href)}
+            href={item.href}
             className={`nav-link relative text-base font-semibold transition-colors duration-300 px-6 py-3 rounded-[30px] border-none bg-transparent cursor-pointer select-none z-[2] w-max ${
               (hoverIndex !== null ? hoverIndex : activeIndex) === index ? 'text-white' : 'text-black'
             }`}
           >
             {item.name}
-          </button>
+          </a>
         )
       ))}
     </nav>

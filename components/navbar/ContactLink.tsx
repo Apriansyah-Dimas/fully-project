@@ -4,24 +4,25 @@ import { forwardRef } from 'react'
 
 interface ContactLinkProps {
   className?: string
+  href?: string
   onMouseEnter?: () => void
   onMouseLeave?: () => void
   onClick?: () => void
 }
 
-export const ContactLink = forwardRef<HTMLButtonElement, ContactLinkProps>(
-  ({ className, onMouseEnter, onMouseLeave, onClick }, ref) => {
+export const ContactLink = forwardRef<HTMLAnchorElement, ContactLinkProps>(
+  ({ className, href = '/contact', onMouseEnter, onMouseLeave, onClick }, ref) => {
     return (
-      <button
+      <a
         ref={ref}
-        type="button"
+        href={href}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
         className={className}
       >
         Contact
-      </button>
+      </a>
     )
   }
 )
