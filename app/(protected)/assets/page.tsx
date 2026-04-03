@@ -59,7 +59,7 @@ function AnimatedCard({
 
 export default function AssetsPage() {
   return (
-    <main className="absolute top-20 bottom-16 left-0 right-0 px-8 flex items-center justify-center">
+    <main className="w-full h-full flex items-center justify-center">
       <div className="flex gap-8 justify-center items-center flex-wrap max-w-6xl">
         {ASSETS_CARDS.map((card, index) => (
           <AnimatedCard key={card.id} delay={index * 100}>

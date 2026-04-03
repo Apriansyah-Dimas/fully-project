@@ -10,9 +10,11 @@ interface ProtectedNavbarProps {
 
 const navItems = [
   { name: 'Home', href: '/home' },
+  { name: 'About', href: '/about' },
   { name: 'Calendar', href: '/calendar' },
   { name: 'Assets', href: '/assets' },
   { name: 'Handbook', href: '/handbook' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function ProtectedNavbar({ currentView }: ProtectedNavbarProps) {
