@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-export default function AboutPage() {
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-8 py-12">
-      <div className="text-center max-w-[900px] w-full">
-=======
 import { PageShell } from '@/components/templates/PageShell'
 
 export default function AboutPage() {
   return (
     <PageShell className="flex flex-col items-center justify-center min-h-screen">
       <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards]">
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
         {/* About Image */}
         <div className="w-full h-[110px] mt-8 mb-6 flex justify-center">
           <img
@@ -62,10 +55,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-    </main>
-=======
     </PageShell>
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
   )
 }

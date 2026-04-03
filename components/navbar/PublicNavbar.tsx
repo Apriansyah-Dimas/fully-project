@@ -19,7 +19,7 @@ export function PublicNavbar({ currentView }: PublicNavbarProps) {
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(0)
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)
-  const navItemRefs = useRef<(HTMLButtonElement | null)[]>(
+  const navItemRefs = useRef<(HTMLAnchorElement | null)[]>(
     navItems.map(() => null)
   )
 
@@ -61,7 +61,7 @@ export function PublicNavbar({ currentView }: PublicNavbarProps) {
         ) : (
           <a
             key={item.name}
-            ref={(el) => { navItemRefs.current[index] = el as any }}
+            ref={(el) => { navItemRefs.current[index] = el }}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
             href={item.href}

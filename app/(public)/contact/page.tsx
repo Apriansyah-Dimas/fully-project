@@ -1,27 +1,16 @@
-<<<<<<< HEAD
-export default function ContactPage() {
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-8 py-12">
-      <div className="text-center max-w-[900px] w-full">
-=======
 import { PageShell } from '@/components/templates/PageShell'
 
 export default function ContactPage() {
   return (
     <PageShell className="flex flex-col items-center justify-center min-h-screen">
       <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards]">
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
         <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold text-black leading-[1.1] tracking-[-0.02em] mb-8">
           Contact Us
         </h1>
 
         {/* Contact Grid */}
         <div className="grid grid-cols-2 gap-6 text-left mx-auto">
-<<<<<<< HEAD
-          {/* LEFT: Locations Card */}
-=======
           {/* LEFT: Locations Card (50%) */}
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
           <div className="bg-black text-white p-5 pr-12 pl-12 rounded-2xl flex flex-col justify-start">
             <h3 className="text-xl font-bold mb-3 uppercase tracking-widest flex items-center gap-3">
               <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -34,22 +23,14 @@ export default function ContactPage() {
               Biomedical Campus - Knowledge Tower 1st Floor, Zone 2, Kavling Digital Hub Jl. Damai Foresta, Sampora, Cisauk Tangerang 15345
             </p>
             <p className="text-sm leading-relaxed text-justify mt-3">
-<<<<<<< HEAD
-              <strong>Deltamas 1 & 2</strong><br />
-=======
               <strong>Deltamas 1 &amp; 2</strong><br />
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
               Rental Factory Building, Greenland International Industrial Center (GIIC) – Kota Deltamas, Blok A-8, Sukamukti, Kabupaten Bekasi, Jawa Barat 17330
             </p>
           </div>
 
           {/* RIGHT COLUMN WRAPPER */}
           <div className="grid grid-cols-2 gap-4">
-<<<<<<< HEAD
-            {/* Email Card */}
-=======
             {/* Email Card (Top Left) */}
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
             <div className="bg-black text-white p-5 rounded-2xl flex flex-col justify-start">
               <h3 className="text-xl font-bold mb-3 uppercase tracking-widest flex items-center gap-3">
                 <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -65,11 +46,7 @@ export default function ContactPage() {
               </a>
             </div>
 
-<<<<<<< HEAD
-            {/* Phone Card */}
-=======
             {/* Phone Card (Top Right) */}
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
             <div className="bg-black text-white p-5 rounded-2xl flex flex-col justify-start">
               <h3 className="text-xl font-bold mb-3 uppercase tracking-widest flex items-center gap-3">
                 <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -82,11 +59,7 @@ export default function ContactPage() {
               </a>
             </div>
 
-<<<<<<< HEAD
-            {/* Social Media Card */}
-=======
             {/* Social Media Card (Bottom Full Width) */}
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
             <div className="col-span-2 bg-[#6365b9] text-white p-5 rounded-2xl flex flex-col justify-start">
               <h3 className="text-xl font-bold mb-2 uppercase tracking-widest flex items-center gap-3">
                 <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -126,10 +99,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-    </main>
-=======
     </PageShell>
->>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
   )
 }

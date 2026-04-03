@@ -28,7 +28,7 @@ const mockUser = {
 }
 
 export function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [user] = useState<User | null>(mockUser)
+  const [user] = useState<User | null>(mockUser as unknown as User)
   const [loading] = useState(false)
   const [supabase] = useState<SupabaseClient | null>(null)
 
