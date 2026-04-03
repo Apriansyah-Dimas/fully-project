@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { RotatingText } from '@/components/home/RotatingText'
+import { PageShell } from '@/components/templates/PageShell'
 
 const LINE1_TEXT = "Welcome to HR Imajin,"
 const STATIC_TEXT = "Your Internal"
@@ -35,7 +36,11 @@ export default function HomePage() {
   }, [])
 
   return (
+<<<<<<< HEAD
     <main className="min-h-screen flex flex-col items-center justify-center px-8 py-12">
+=======
+    <PageShell className="flex flex-col items-center justify-center min-h-screen">
+>>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
       <div className="hero active text-center max-w-[900px] w-full">
         {/* Line 1 */}
         <div className="line1">
@@ -63,12 +68,20 @@ export default function HomePage() {
             ))}
           </span>
 
+<<<<<<< HEAD
           {/* Rotating pill */}
+=======
+          {/* Rotating pill - langsung muncul dari awal */}
+>>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
           <span className="rotating-pill">
             <RotatingText />
           </span>
         </div>
       </div>
+<<<<<<< HEAD
     </main>
+=======
+    </PageShell>
+>>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
   )
 }

@@ -60,7 +60,11 @@ export default function LoginPage() {
 
             <div className="flex gap-3">
               <a
+<<<<<<< HEAD
                 href="/home"
+=======
+                href="/"
+>>>>>>> a86d915da190447ea48559e352b8f2d96558b5b1
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-center text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 Cancel

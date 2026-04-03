@@ -8,16 +8,11 @@ interface DashboardShellProps {
 }
 
 export async function DashboardShell({ children, className }: DashboardShellProps) {
-  let supabase, user
+  const supabase = await createClient()
 
-  try {
-    supabase = await createClient()
-    const result = await supabase.auth.getUser()
-    user = result.data.user
-  } catch (error) {
-    console.error('[DashboardShell] Auth check failed:', error)
-    redirect('/login?error=session_expired')
-  }
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) {
     redirect('/login')
