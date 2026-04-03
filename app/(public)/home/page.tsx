@@ -36,7 +36,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <PageShell className="flex flex-col items-center justify-center min-h-screen">
+    <PageShell>
       <div className="hero active text-center max-w-[900px] w-full">
         {/* Line 1 */}
         <div className="line1">

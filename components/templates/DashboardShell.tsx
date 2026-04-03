@@ -19,7 +19,7 @@ export async function DashboardShell({ children, className }: DashboardShellProp
   }
 
   return (
-    <DashboardShellClient user={{ email: user.email || 'User' }} className={className}>
+    <DashboardShellClient className={className}>
       {children}
     </DashboardShellClient>
   )

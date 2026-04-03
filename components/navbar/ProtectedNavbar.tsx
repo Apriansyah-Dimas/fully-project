@@ -28,10 +28,10 @@ export function ProtectedNavbar({ currentView }: ProtectedNavbarProps) {
   // Set initial active index based on pathname
   useEffect(() => {
     const index = navItems.findIndex(item => item.href === pathname)
-    if (index !== -1 && index !== activeIndex) {
+    if (index !== -1) {
       setActiveIndex(index)
     }
-  }, [pathname, activeIndex])
+  }, [pathname])
 
   const handleMouseEnter = useCallback((index: number) => {
     setHoverIndex(index)

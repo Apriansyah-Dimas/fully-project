@@ -1,6 +1,6 @@
 export default function HandbookPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-8 py-12">
+    <main className="h-full flex items-center justify-center px-8">
       <div className="text-center max-w-[900px] w-full">
         <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold text-black leading-[1.1] tracking-[-0.02em] mb-8">
           Handbook

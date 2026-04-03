@@ -2,8 +2,8 @@ import { PageShell } from '@/components/templates/PageShell'
 
 export default function ContactPage() {
   return (
-    <PageShell className="flex flex-col items-center justify-center min-h-screen">
-      <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards]">
+    <PageShell>
+      <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards] scale-90">
         <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold text-black leading-[1.1] tracking-[-0.02em] mb-8">
           Contact Us
         </h1>

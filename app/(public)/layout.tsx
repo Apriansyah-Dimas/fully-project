@@ -1,7 +1,7 @@
 'use client'
 
-import { PublicNavbar } from '@/components/navbar/PublicNavbar'
-import { LoginButton } from '@/components/home/LoginButton'
+import { SmartNavbar } from '@/components/navbar/SmartNavbar'
+import { SmartLoginButton } from '@/components/home/SmartLoginButton'
 import { PageShell } from '@/components/templates/PageShell'
 
 export default function PublicLayout({
@@ -10,10 +10,10 @@ export default function PublicLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      <PublicNavbar />
+    <div className="h-screen w-full overflow-hidden">
+      <SmartNavbar />
       <PageShell>{children}</PageShell>
-      <LoginButton />
-    </>
+      <SmartLoginButton />
+    </div>
   )
 }

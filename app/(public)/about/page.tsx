@@ -2,8 +2,8 @@ import { PageShell } from '@/components/templates/PageShell'
 
 export default function AboutPage() {
   return (
-    <PageShell className="flex flex-col items-center justify-center min-h-screen">
-      <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards]">
+    <PageShell>
+      <div className="text-center max-w-[900px] w-full animate-[fadeIn_0.5s_ease_forwards] scale-90">
         {/* About Image */}
         <div className="w-full h-[110px] mt-8 mb-6 flex justify-center">
           <img

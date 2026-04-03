@@ -93,7 +93,7 @@ export default function Calendar() {
 
   return (
     <>
-      <main className="w-full h-full flex items-center justify-center">
+      <main className="w-full h-full flex items-center justify-center scale-90">
         <div className="flex flex-col lg:flex-row gap-8 justify-center items-start w-full max-w-5xl">
           
           {/* Calendar Card */}

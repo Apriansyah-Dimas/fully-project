@@ -1,6 +1,6 @@
 export default function DashboardPage() {
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-16rem)]">
+    <div className="flex items-center justify-center h-full">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Selamat datang di Dashboard
