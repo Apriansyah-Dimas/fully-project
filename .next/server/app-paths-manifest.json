@@ -1,13 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/admin/add-event/page": "app/admin/add-event/page.js",
   "/page": "app/page.js",
   "/login/page": "app/login/page.js",
-  "/(protected)/about/page": "app/(protected)/about/page.js",
-  "/(protected)/assets/page": "app/(protected)/assets/page.js",
-  "/(protected)/calendar/page": "app/(protected)/calendar/page.js",
-  "/(protected)/contact/page": "app/(protected)/contact/page.js",
   "/(protected)/handbook/page": "app/(protected)/handbook/page.js",
-  "/(protected)/dashboard/page": "app/(protected)/dashboard/page.js",
-  "/(protected)/home/page": "app/(protected)/home/page.js"
+  "/(protected)/assets/page": "app/(protected)/assets/page.js"
 }

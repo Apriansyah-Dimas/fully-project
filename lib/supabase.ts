@@ -22,22 +22,32 @@ export async function getCalendarEvents(): Promise<CalendarEvent[]> {
   console.log('[Supabase] Fetching events from table: calendar_events')
   console.log('[Supabase] URL:', supabaseUrl)
   
-  const { data, error } = await supabase
-    .from('calendar_events')
-    .select('*')
-    .order('event_date', { ascending: true })
+  try {
+    const { data, error } = await supabase
+      .from('calendar_events')
+      .select('*')
+      .order('event_date', { ascending: true })
 
-  if (error) {
-    console.error('[Supabase] Error fetching calendar events:', error)
-    console.error('[Supabase] Error code:', error.code)
-    console.error('[Supabase] Error message:', error.message)
-    console.error('[Supabase] Error details:', error.details)
+    if (error) {
+      console.error('[Supabase] Error fetching calendar events:', error)
+      console.error('[Supabase] Error code:', error.code)
+      console.error('[Supabase] Error message:', error.message)
+      console.error('[Supabase] Error details:', error.details)
+      return []
+    }
+
+    console.log('[Supabase] Raw data from DB:', data)
+    console.log('[Supabase] Data length:', data?.length)
+    return data || []
+  } catch (err) {
+    const error = err as Error
+    console.error('[Supabase] Network error:', error.message)
+    console.error('[Supabase] This usually means:')
+    console.error('[Supabase] 1. Your Supabase project is PAUSED (check supabase.com/dashboard)')
+    console.error('[Supabase] 2. Network/firewall is blocking the request')
+    console.error('[Supabase] 3. The Supabase URL is incorrect')
     return []
   }
-
-  console.log('[Supabase] Raw data from DB:', data)
-  console.log('[Supabase] Data length:', data?.length)
-  return data || []
 }
 
 export async function getEventsForDate(date: Date): Promise<CalendarEvent[]> {

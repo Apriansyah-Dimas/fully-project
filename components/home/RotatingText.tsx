@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 
 const TEXTS = ['Platform', 'System', 'Services']
 const STAGGER = 0.025
@@ -15,6 +15,8 @@ export function RotatingText() {
   const currentIdxRef = useRef(0)
   const busyRef = useRef(false)
   const rotationIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const initializedRef = useRef(false)
+  const holdTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const measureWord = (word: string) => {
     if (!pillRef.current) return 0
@@ -35,6 +37,11 @@ export function RotatingText() {
     pillRef.current.style.width = `${totalWidth}px`
   }
 
+  const clearViewport = () => {
+    if (!viewportRef.current) return
+    viewportRef.current.innerHTML = ''
+  }
+
   const buildLayer = (word: string, direction: 'enter' | 'exit') => {
     const layer = document.createElement('span')
     layer.className = 'word-layer'
@@ -45,7 +52,7 @@ export function RotatingText() {
       const box = document.createElement('span')
       box.className = 'char-box'
       const inner = document.createElement('span')
-      inner.className = 'char-inner'
+      inner.className = `char-inner animating-${direction}`
       inner.textContent = ch === ' ' ? '\u00A0' : ch
 
       const delay = direction === 'enter'
@@ -53,16 +60,18 @@ export function RotatingText() {
         : i * STAGGER * 1000
 
       if (direction === 'enter') {
-        inner.animate([
-          { transform: 'translateY(100%)', opacity: 0, color: '#ffffff' },
-          { transform: 'translateY(0)', opacity: 1, color: '#ffffff' }
-        ], { duration: ENTER_DUR, delay, easing: 'cubic-bezier(0.34,1.56,0.64,1)', fill: 'both' })
+        inner.style.transform = 'translateY(100%)'
+        inner.style.opacity = '0'
       } else {
-        inner.animate([
-          { transform: 'translateY(0)', opacity: 1, color: '#ffffff' },
-          { transform: 'translateY(-120%)', opacity: 0, color: '#ffffff' }
-        ], { duration: EXIT_DUR, delay, easing: 'cubic-bezier(0.55,0,1,0.45)', fill: 'both' })
+        inner.style.transform = 'translateY(0)'
+        inner.style.opacity = '1'
       }
+
+      inner.style.setProperty('--rot-enter-dur', `${ENTER_DUR}ms`)
+      inner.style.setProperty('--rot-easing', 'cubic-bezier(0.34,1.56,0.64,1)')
+      inner.style.setProperty('--rot-exit-dur', `${EXIT_DUR}ms`)
+      inner.style.setProperty('--rot-exit-easing', 'cubic-bezier(0.55,0,1,0.45)')
+      inner.style.animationDelay = `${delay}ms`
 
       box.appendChild(inner)
       layer.appendChild(box)
@@ -84,12 +93,10 @@ export function RotatingText() {
       return
     }
 
-    // Build exit layer for current word
     const exitLayer = buildLayer(currentWord, 'exit')
     currentLayer.replaceWith(exitLayer)
     const exitTotal = EXIT_DUR + currentWord.length * STAGGER * 1000
 
-    // Remove exit layer and adjust width
     setTimeout(() => {
       exitLayer.remove()
       if (pillRef.current) {
@@ -98,7 +105,6 @@ export function RotatingText() {
       }
     }, exitTotal)
 
-    // Build enter layer for next word
     setTimeout(() => {
       currentIdxRef.current = nextIdx
       const enterLayer = buildLayer(nextWord, 'enter')
@@ -111,8 +117,21 @@ export function RotatingText() {
     }, exitTotal + WIDTH_DUR)
   }
 
-  const initFirst = () => {
-    if (!pillRef.current || !viewportRef.current) return
+  const reinitialize = useCallback(() => {
+    if (rotationIntervalRef.current) {
+      clearInterval(rotationIntervalRef.current)
+      rotationIntervalRef.current = null
+    }
+    if (holdTimeoutRef.current) {
+      clearTimeout(holdTimeoutRef.current)
+      holdTimeoutRef.current = null
+    }
+    
+    busyRef.current = false
+    currentIdxRef.current = 0
+    clearViewport()
+    
+    if (!pillRef.current) return
 
     const word = TEXTS[0]
     const w = measureWord(word)
@@ -121,19 +140,18 @@ export function RotatingText() {
     pillRef.current.style.width = '0px'
 
     const layer = buildLayer(word, 'enter')
-    viewportRef.current.appendChild(layer)
+    viewportRef.current?.appendChild(layer)
 
     setTimeout(() => {
       if (!pillRef.current) return
       pillRef.current.style.transition = `width ${WIDTH_DUR}ms cubic-bezier(0.4,0,0.2,1)`
       setPillWidth(w)
-    }, ENTER_DUR + TEXTS[0].length * STAGGER * 1000)
+    }, ENTER_DUR + word.length * STAGGER * 1000)
 
-    // Start rotation after initial animation
     setTimeout(() => {
       startRotation()
-    }, ENTER_DUR + TEXTS[0].length * STAGGER * 1000 + WIDTH_DUR + 500)
-  }
+    }, ENTER_DUR + word.length * STAGGER * 1000 + WIDTH_DUR + 500)
+  }, [])
 
   const startRotation = () => {
     rotationIntervalRef.current = setInterval(() => {
@@ -142,14 +160,31 @@ export function RotatingText() {
   }
 
   useEffect(() => {
-    initFirst()
+    initializedRef.current = true
+    reinitialize()
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && initializedRef.current) {
+        const hasBrokenState = !viewportRef.current?.querySelector('.word-layer')
+        if (hasBrokenState) {
+          reinitialize()
+        }
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
 
     return () => {
+      initializedRef.current = false
       if (rotationIntervalRef.current) {
         clearInterval(rotationIntervalRef.current)
       }
+      if (holdTimeoutRef.current) {
+        clearTimeout(holdTimeoutRef.current)
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [])
+  }, [reinitialize])
 
   return (
     <span

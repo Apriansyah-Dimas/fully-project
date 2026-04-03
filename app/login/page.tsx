@@ -138,7 +138,7 @@ export default function LoginPage() {
 
   const handleCancel = () => {
     if (loading) return
-    router.back()
+    router.push('/')
   }
 
   const handleSubmit = async (e: FormEvent) => {
