@@ -6,6 +6,13 @@
 @tailwind utilities;
 
 :root {
+  /* Layout Safe Zone - Prevents overlap between navbar and login/logout buttons */
+  /* Navbar: fixed top-8 (32px) + height ~48px = ~80px (5rem) */
+  /* Button: fixed bottom-8 (32px) + height ~48px = ~80px (5rem) */
+  --safe-zone-top: 4.5rem;           /* 72px - Safe distance from top (navbar bottom) */
+  --safe-zone-bottom: 4rem;       /* 64px - Safe distance from bottom (button top) */
+  --safe-zone-available: calc(100vh - var(--safe-zone-top) - var(--safe-zone-bottom));
+
   --login-bg-color: #f5f3ef;
   --login-card-bg: rgba(255, 255, 255, 0.75);
   --login-card-border: rgba(0, 0, 0, 0.07);

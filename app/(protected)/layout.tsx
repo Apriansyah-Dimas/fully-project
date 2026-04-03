@@ -36,9 +36,12 @@ export default function ProtectedLayout({
   }
 
   return (
-    <div className="h-screen w-full overflow-hidden">
+    <div className="h-screen w-full overflow-hidden" style={{
+      paddingTop: 'var(--safe-zone-top)',
+      paddingBottom: 'var(--safe-zone-bottom)',
+    }}>
       <SmartNavbar />
-      <div className="pt-24 pb-8 px-4 h-full flex items-center justify-center">
+      <div className="px-4 h-full flex items-center justify-center">
         <div className="mx-auto max-w-7xl w-full">
           {children}
         </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { TiltedCard } from '@/components/assets/TiltedCard'
+import { SafeContentZone } from '@/components/templates/SafeContentZone'
 import '@/components/assets/TiltedCard.css'
 
 const ASSETS_CARDS = [
@@ -59,23 +60,25 @@ function AnimatedCard({
 
 export default function AssetsPage() {
   return (
-    <main className="w-full h-full flex items-center justify-center scale-90">
-      <div className="flex gap-8 justify-center items-center flex-wrap max-w-6xl">
-        {ASSETS_CARDS.map((card, index) => (
-          <AnimatedCard key={card.id} delay={index * 100}>
-            <TiltedCard
-              imageSrc={card.imageSrc}
-              altText={card.captionText}
-              captionText={card.captionText}
-              captionMaxWidth={card.captionMaxWidth}
-              containerHeight="320px"
-              containerWidth="240px"
-              rotateAmplitude={12}
-              scaleOnHover={1.05}
-            />
-          </AnimatedCard>
-        ))}
+    <SafeContentZone>
+      <div className="w-full h-full flex items-center justify-center scale-90">
+        <div className="flex gap-8 justify-center items-center flex-wrap max-w-6xl">
+          {ASSETS_CARDS.map((card, index) => (
+            <AnimatedCard key={card.id} delay={index * 100}>
+              <TiltedCard
+                imageSrc={card.imageSrc}
+                altText={card.captionText}
+                captionText={card.captionText}
+                captionMaxWidth={card.captionMaxWidth}
+                containerHeight="320px"
+                containerWidth="240px"
+                rotateAmplitude={12}
+                scaleOnHover={1.05}
+              />
+            </AnimatedCard>
+          ))}
+        </div>
       </div>
-    </main>
+    </SafeContentZone>
   )
 }
