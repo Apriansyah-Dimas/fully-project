@@ -1,5 +1,30 @@
 import { login } from '@/actions/login'
 import { PageShell } from '@/components/templates/PageShell'
+import { Suspense } from 'react'
+
+function LoginError() {
+  return (
+    <Suspense fallback={null}>
+      <LoginErrorInner />
+    </Suspense>
+  )
+}
+
+function LoginErrorInner() {
+  const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+  const error = params.get('error')
+  
+  if (!error) return null
+
+  return (
+    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+      <p className="text-sm text-red-600 text-center">
+        {error === 'invalid_credentials' && 'Invalid email or password. Please try again.'}
+        {error === 'missing_credentials' && 'Please fill in all required fields.'}
+      </p>
+    </div>
+  )
+}
 
 export default function LoginPage() {
   return (
@@ -8,12 +33,14 @@ export default function LoginPage() {
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-              Sign In
+              Log In
             </h1>
             <p className="text-sm text-gray-600">
               Enter your credentials to access your account
             </p>
           </div>
+
+          <LoginError />
 
           <form action={login} className="space-y-6">
             <div>
@@ -67,9 +94,9 @@ export default function LoginPage() {
               </a>
               <button
                 type="submit"
-                className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+                className="flex-1 px-4 py-3 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
               >
-                Sign In
+                Log In
               </button>
             </div>
           </form>
