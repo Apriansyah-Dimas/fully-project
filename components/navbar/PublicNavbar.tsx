@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { NavHighlight } from './NavHighlight'
 import { ContactLink } from './ContactLink'
@@ -59,7 +60,7 @@ export function PublicNavbar({ currentView }: PublicNavbarProps) {
             }`}
           />
         ) : (
-          <a
+          <Link
             key={item.name}
             ref={(el) => { navItemRefs.current[index] = el }}
             onMouseEnter={() => handleMouseEnter(index)}
@@ -70,7 +71,7 @@ export function PublicNavbar({ currentView }: PublicNavbarProps) {
             }`}
           >
             {item.name}
-          </a>
+          </Link>
         )
       ))}
     </nav>
