@@ -1,18 +1,9 @@
-'use client'
-
-import BackgroundTemplate from '@/components/background/BackgroundTemplate'
-import { LogoutButton } from '@/components/home/LogoutButton'
+import { DashboardShell } from '@/components/templates/DashboardShell'
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <>
-      <BackgroundTemplate />
-      {children}
-      <LogoutButton />
-    </>
-  )
+  return <DashboardShell>{children}</DashboardShell>
 }

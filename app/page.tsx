@@ -1,50 +1,37 @@
-'use client'
+import Link from 'next/link'
+import { PageShell } from '@/components/templates/PageShell'
 
-import { Suspense } from 'react'
-import { useSupabase } from '@/components/providers/SessionProvider'
-import { AppView } from '@/components/views/AppView'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
-
-function HomeContent() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const { user, loading } = useSupabase()
-
-  useEffect(() => {
-    // Check if there's a view param, if not redirect based on auth
-    const viewParam = searchParams.get('view')
-
-    if (!loading && !viewParam) {
-      // Set initial view based on auth state
-      const initialView = user ? 'home' : 'home'
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', initialView)
-      router.replace(url.toString())
-    }
-  }, [user, loading, router, searchParams])
-
-  // Show loading state while checking auth
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
-      </div>
-    )
-  }
-
-  // Show the AppView component
-  return <AppView />
-}
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+    <PageShell className="flex flex-col items-center justify-center min-h-screen">
+      <div className="text-center max-w-2xl">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          Welcome
+        </h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Explore our platform and discover what we have to offer
+        </p>
+        <div className="flex gap-4 justify-center">
+          <Link
+            href="/home"
+            className="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+          >
+            Go to Home
+          </Link>
+          <Link
+            href="/about"
+            className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/contact"
+            className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+          >
+            Contact
+          </Link>
+        </div>
       </div>
-    }>
-      <HomeContent />
-    </Suspense>
+    </PageShell>
   )
 }
